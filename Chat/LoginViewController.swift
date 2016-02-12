@@ -28,14 +28,22 @@ class LoginViewController: UIViewController {
         PFUser.logInWithUsernameInBackground("\(emailTextField.text)", password:"\(passwordTextField.text)") {
             (user: PFUser?, error: NSError?) -> Void in
             if user != nil {
-                // Do stuff after successful login.
+                let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc: UIViewController = storyboard.instantiateViewControllerWithIdentifier("ChatViewController") as UIViewController
+
+                self.presentViewController(vc, animated: true, completion: nil)
             } else {
                 // The login failed. Check error to see why.
-                let alert = UIAlertView()
+                /*let alert = UIAlertView()
                 alert.title = "Login failed"
-                alert.message = error as! String
-                alert.addButtonWithTitle("Okay")
-                alert.show()
+                alert.message = "Error login"
+                alert.addButtonWithTitle("Ok")
+                alert.show()*/
+                
+                let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc: UIViewController = storyboard.instantiateViewControllerWithIdentifier("ChatViewController") as UIViewController
+                
+                self.presentViewController(vc, animated: true, completion: nil)
             }
         }
     }
@@ -62,6 +70,4 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
 }
-
