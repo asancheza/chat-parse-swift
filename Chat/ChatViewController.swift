@@ -13,7 +13,18 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var messageChat: UITextField!
     
     @IBAction func onSend(sender: AnyObject) {
+        var message = PFObject(className:"Message")
+        message["text"] = messageChat.text
         
+        message.saveInBackgroundWithBlock {
+            (success: Bool, error: NSError?) -> Void in
+            if (success) {
+                print("Message has been sent")
+            } else {
+                // There was a problem, check error.description
+            }
+        }
+
     }
     
     override func viewDidLoad() {
